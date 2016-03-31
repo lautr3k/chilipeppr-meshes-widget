@@ -65,6 +65,22 @@ cprequire_test(["inline:ch-onlfait-chilipeppr-meshes-widget"], function(myWidget
             });
         }
     );
+    
+    
+    $('body').append('<div id="com-chilipeppr-flash"></div>');
+    
+    chilipeppr.load(
+        "#com-chilipeppr-flash",
+        "http://fiddle.jshell.net/chilipeppr/90698kax/show/light/",
+
+        function() {
+            console.log("mycallback got called after loading flash msg module");
+            cprequire(["inline:com-chilipeppr-elem-flashmsg"], function(fm) {
+                //console.log("inside require of " + fm.id);
+                fm.init();
+            });
+        }
+    );
 
     // init my widget
     myWidget.init();
