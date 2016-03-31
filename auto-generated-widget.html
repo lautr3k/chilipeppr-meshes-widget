@@ -206,12 +206,31 @@ cpdefine("inline:ch-onlfait-chilipeppr-meshes-widget", ["chilipeppr_ready", /* o
             this.btnSetup();
             this.forkSetup();
 
-
+            this.setupDragDrop();
             // /com-chilipeppr-elem-dragdrop/ondropped
-            chilipeppr.subscribe("/com-chilipeppr-elem-dragdrop/ondroppedSTL", this, this.onDroppedSTL, 9); // default is 10, we do 9 to be higher priority
+            //chilipeppr.subscribe("/com-chilipeppr-elem-dragdrop/ondroppedSTL", this, this.onDroppedSTL, 9); // default is 10, we do 9 to be higher priority
         
-
             console.log("I am done being initted.");
+        },
+        onDroppedSTL: function(data) {
+            console.log("STL Dropped:  ", data);
+
+            //var reader = new FileReader();
+
+            // reader.readAsArrayBuffer (data);
+            //reader.readAsText (data);
+
+            var arrayBuffer;
+            var fileReader = new FileReader();
+            fileReader.onload = function() {
+                arrayBuffer = this.result;
+                console.log('Raw filereader result:  ', this.result);
+            };
+            fileReader.readAsArrayBuffer(data);
+
+
+            console.log("result:  ", fileReader.result);
+            //this.parseStlBinary(reader.result);
         },
         /**
          * Call this method from init to setup all the buttons when this widget
@@ -245,42 +264,7 @@ cpdefine("inline:ch-onlfait-chilipeppr-meshes-widget", ["chilipeppr_ready", /* o
                 container: 'body'
             });
 
-            // Init Say Hello Button on Main Toolbar
-            // We are inlining an anonymous method as the callback here
-            // as opposed to a full callback method in the Hello Word 2
-            // example further below. Notice we have to use "that" so 
-            // that the this is set correctly inside the anonymous method
-            // $('#' + this.id + ' .btn-sayhello').click(function() {
-            //     console.log("saying hello");
-            //     // Make sure popover is immediately hidden
-            //     $('#' + that.id + ' .btn-sayhello').popover("hide");
-            //     // Show a flash msg
-            //     chilipeppr.publish(
-            //         "/com-chilipeppr-elem-flashmsg/flashmsg",
-            //         "Hello Title",
-            //         "Hello World from widget " + that.id,
-            //         1000
-            //     );
-            // });
-
-            // Init Hello World 2 button on Tab 1. Notice the use
-            // of the slick .bind(this) technique to correctly set "this"
-            // when the callback is called
-            //$('#' + this.id + ' .btn-helloworld2').click(this.onHelloBtnClick.bind(this));
-
         },
-        /**
-         * onHelloBtnClick is an example of a button click event callback
-         */
-        // onHelloBtnClick: function(evt) {
-        //     console.log("saying hello 2 from btn in tab 1");
-        //     chilipeppr.publish(
-        //         '/com-chilipeppr-elem-flashmsg/flashmsg',
-        //         "Hello 2 Title",
-        //         "Hello World 2 from Tab 1 from widget " + this.id,
-        //         2000 /* show for 2 second */
-        //     );
-        // },
         /**
          * User options are available in this property for reference by your
          * methods. If any change is made on these options, please call
