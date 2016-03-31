@@ -92,7 +92,6 @@ cprequire_test(["inline:ch-onlfait-chilipeppr-meshes-widget"], function(myWidget
         function() {
             console.log("mycallback got called after loading flash msg module");
             cprequire(["inline:com-chilipeppr-elem-flashmsg"], function(fm) {
-                //console.log("inside require of " + fm.id);
                 fm.init();
             });
         }
@@ -104,11 +103,9 @@ cprequire_test(["inline:ch-onlfait-chilipeppr-meshes-widget"], function(myWidget
     chilipeppr.load(
         "#com-chilipeppr-flash",
         "http://fiddle.jshell.net/chilipeppr/90698kax/show/light/",
-
         function() {
             console.log("mycallback got called after loading flash msg module");
             cprequire(["inline:com-chilipeppr-elem-flashmsg"], function(fm) {
-                //console.log("inside require of " + fm.id);
                 fm.init();
             });
         }
@@ -119,15 +116,10 @@ cprequire_test(["inline:ch-onlfait-chilipeppr-meshes-widget"], function(myWidget
 
     chilipeppr.load("#3dviewer", "https://raw.githubusercontent.com/chilipeppr/widget-3dviewer/master/auto-generated-widget.html", function() {
         cprequire(['inline:com-chilipeppr-widget-3dviewer'], function(threed) {
-            threed.init({
-                //doMyOwnDragDrop: true
-            });
+            threed.init();
             myWidget.init();
         });
     });
-
-    // init my widget
-    //myWidget.init();
     
     $('#' + myWidget.id).css({
         'top': '90px',
@@ -138,9 +130,6 @@ cprequire_test(["inline:ch-onlfait-chilipeppr-meshes-widget"], function(myWidget
     });
     
     $('title').html(myWidget.name);
-    
-
-    //myWidget.bind("body", null);
 
 } /*end_test*/ );
 
@@ -166,38 +155,22 @@ cpdefine("inline:ch-onlfait-chilipeppr-meshes-widget", ["chilipeppr_ready", /* o
          * Define the publish signals that this widget/element owns or defines so that
          * other widgets know how to subscribe to them and what they do.
          */
-        publish: {
-            // Define a key:value pair here as strings to document what signals you publish.
-            //'/onExampleGenerate': 'Example: Publish this signal when we go to generate gcode.'
-        },
+        publish: {},
         /**
          * Define the subscribe signals that this widget/element owns or defines so that
          * other widgets know how to subscribe to them and what they do.
          */
-        subscribe: {
-            // Define a key:value pair here as strings to document what signals you subscribe to
-            // so other widgets can publish to this widget to have it do something.
-            // '/onExampleConsume': 'Example: This widget subscribe to this signal so other widgets can send to us and we'll do something with it.'
-            '/com-chilipeppr-widget-3dviewer/com-chilipeppr-elem-dragdrop/ondropped': '...'
-        },
+        subscribe: {},
         /**
          * Document the foreign publish signals, i.e. signals owned by other widgets
          * or elements, that this widget/element publishes to.
          */
-        foreignPublish: {
-            // Define a key:value pair here as strings to document what signals you publish to
-            // that are owned by foreign/other widgets.
-            // '/jsonSend': 'Example: We send Gcode to the serial port widget to do stuff with the CNC controller.'
-        },
+        foreignPublish: {},
         /**
          * Document the foreign subscribe signals, i.e. signals owned by other widgets
          * or elements, that this widget/element subscribes to.
          */
-        foreignSubscribe: {
-            // Define a key:value pair here as strings to document what signals you subscribe to
-            // that are owned by foreign/other widgets.
-            '/com-chilipeppr-widget-3dviewer/com-chilipeppr-elem-dragdrop/ondropped': 'Example: We subscribe to this signal at a higher priority to intercept the signal. We do not let it propagate by returning false.'
-        },
+        foreignSubscribe: {},
         /**
          * All widgets should have an init method. It should be run by the
          * instantiating code like a workspace or a different widget.
@@ -208,15 +181,62 @@ cpdefine("inline:ch-onlfait-chilipeppr-meshes-widget", ["chilipeppr_ready", /* o
             this.setupUiFromLocalStorage();
             this.btnSetup();
             this.forkSetup();
+            this.dropSetup();
 
-            chilipeppr.subscribe('/com-chilipeppr-widget-3dviewer/com-chilipeppr-elem-dragdrop/ondropped', this, this.onDropped, 9); // default is 10, we do 9 to be higher priority
-            
             console.log("I am done being initted.");
+        },
+        /**
+         * Setup drag/drop on body.
+         */
+        dropSetup: function(targetSelector) {
+            // self alias
+            var that = this;
+
+            // Create drag and drop
+            this.dropArea = $(targetSelector || 'body');
+            
+            console.error('------------------------------------>>>',this.dropArea);
+
+            // Attach our drag and drop handlers.
+            this.dropArea.bind({
+                drop: function(e) {
+            
+                    console.error('------------------------------------>>>', e);
+                    
+                    // drop event
+                    e = e || window.event;
+                    
+                    // prevent default
+                    e.preventDefault();
+
+                    // jQuery wraps the originalEvent, so we try to detect that here...
+                    e = e.originalEvent || e;
+
+                    // Using e.files with fallback because e.dataTransfer is immutable and can't be overridden in Polyfills (http://sandbox.knarly.com/js/dropfiles/).            
+                    var files = (e.files || e.dataTransfer.files);
+
+                    console.log("Files dropped: ", files);
+
+                    // for (var i = 0; i < files.length; i++) {
+                    //     console.log('Loading STL no ', i);
+                    //     $('#stlFileNames > tbody:last-child').append('<tr id="tr' + [i] + '"><td>' + [i] + '</td><td>' + files[i].name + '</td></tr>');
+                    //     (function(i) {
+                    //         // parse binary STL
+                    //         console.log('But do we have a loader?', that.stlloader);
+                    //         console.log("what does loadFile look like?", that.stlloader.loadFile);
+                    //         that.stlloader.loadFile(files[i], i, that);
+                    //         console.log('After Loadfile no ', i);
+                    //     })(i);
+                    // }
+
+                    return false;
+                }
+            });
         },
         /**
          * Called after an STL file is droped.
          */
-        onDropped: function(data) {
+        onDrop: function(data) {
             console.log("STL Dropped:  ", data);
 
             //var reader = new FileReader();
