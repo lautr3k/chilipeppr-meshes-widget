@@ -52,6 +52,7 @@ cprequire_test(["inline:ch-onlfait-chilipeppr-meshes-widget"], function(myWidget
 
     console.log("test running of " + myWidget.id);
 
+    // flash message test
     $('body').prepend('<div id="testDivForFlashMessageWidget"></div>');
 
     chilipeppr.load(
@@ -66,7 +67,7 @@ cprequire_test(["inline:ch-onlfait-chilipeppr-meshes-widget"], function(myWidget
         }
     );
     
-    
+    // flash message
     $('body').append('<div id="com-chilipeppr-flash"></div>');
     
     chilipeppr.load(
@@ -81,10 +82,37 @@ cprequire_test(["inline:ch-onlfait-chilipeppr-meshes-widget"], function(myWidget
             });
         }
     );
+    
+    // 3d viewer
+    $('body').prepend('<div id="3dviewer"></div>');
+
+    chilipeppr.load("#3dviewer", "https://raw.githubusercontent.com/chilipeppr/widget-3dviewer/master/auto-generated-widget.html", function() {
+        cprequire(['inline:com-chilipeppr-widget-3dviewer'], function(threed) {
+            threed.init({
+                doMyOwnDragDrop: false
+            });
+            //$('#com-chilipeppr-widget-3dviewer .panel-heading').addClass('hidden');
+            //autolevel.addRegionTo3d();
+            //autolevel.loadFileFromLocalStorageKey('com-chilipeppr-widget-autolevel-recent8');
+            //autolevel.toggleShowMatrix();
+
+            // only init eagle widget once 3d is loaded
+            // set doMyOwnDragDrop
+            //ew.init(true);
+            myWidget.init();
+        });
+    });
 
     // init my widget
     myWidget.init();
-    $('#' + myWidget.id).css('margin', '20px');
+    
+    $('#' + myWidget.id).css({
+        'margin': '20px',
+        'position': 'relative',
+        'background': 'transparent',
+        'width': '300px'
+    });
+    
     $('title').html(myWidget.name);
 
 } /*end_test*/ );
