@@ -89,7 +89,7 @@ cprequire_test(["inline:ch-onlfait-chilipeppr-meshes-widget"], function(myWidget
     chilipeppr.load("#3dviewer", "https://raw.githubusercontent.com/chilipeppr/widget-3dviewer/master/auto-generated-widget.html", function() {
         cprequire(['inline:com-chilipeppr-widget-3dviewer'], function(threed) {
             threed.init({
-                doMyOwnDragDrop: false
+                //doMyOwnDragDrop: true
             });
             myWidget.init();
         });
@@ -107,6 +107,9 @@ cprequire_test(["inline:ch-onlfait-chilipeppr-meshes-widget"], function(myWidget
     });
     
     $('title').html(myWidget.name);
+    
+
+    //myWidget.bind("body", null);
 
 } /*end_test*/ );
 
@@ -144,6 +147,7 @@ cpdefine("inline:ch-onlfait-chilipeppr-meshes-widget", ["chilipeppr_ready", /* o
             // Define a key:value pair here as strings to document what signals you subscribe to
             // so other widgets can publish to this widget to have it do something.
             // '/onExampleConsume': 'Example: This widget subscribe to this signal so other widgets can send to us and we'll do something with it.'
+            '/com-chilipeppr-widget-3dviewer/com-chilipeppr-elem-dragdrop/ondropped': '...'
         },
         /**
          * Document the foreign publish signals, i.e. signals owned by other widgets
@@ -153,7 +157,6 @@ cpdefine("inline:ch-onlfait-chilipeppr-meshes-widget", ["chilipeppr_ready", /* o
             // Define a key:value pair here as strings to document what signals you publish to
             // that are owned by foreign/other widgets.
             // '/jsonSend': 'Example: We send Gcode to the serial port widget to do stuff with the CNC controller.'
-            '/com-chilipeppr-elem-dragdrop/ondroppedSTL': 'We subscribe to this signal at a higher priority to intercept the signal, double check if it is an Eagle Brd file and if so, we do not let it propagate by returning false. That way the 3D Viewer, Gcode widget, or other widgets will not get Eagle Brd file drag/drop events because they will not know how to interpret them.'
         },
         /**
          * Document the foreign subscribe signals, i.e. signals owned by other widgets
@@ -162,7 +165,7 @@ cpdefine("inline:ch-onlfait-chilipeppr-meshes-widget", ["chilipeppr_ready", /* o
         foreignSubscribe: {
             // Define a key:value pair here as strings to document what signals you subscribe to
             // that are owned by foreign/other widgets.
-            // '/com-chilipeppr-elem-dragdrop/ondropped': 'Example: We subscribe to this signal at a higher priority to intercept the signal. We do not let it propagate by returning false.'
+            '/com-chilipeppr-widget-3dviewer/com-chilipeppr-elem-dragdrop/ondropped': 'Example: We subscribe to this signal at a higher priority to intercept the signal. We do not let it propagate by returning false.'
         },
         /**
          * All widgets should have an init method. It should be run by the
@@ -175,13 +178,14 @@ cpdefine("inline:ch-onlfait-chilipeppr-meshes-widget", ["chilipeppr_ready", /* o
             this.btnSetup();
             this.forkSetup();
 
-            this.setupDragDrop();
-            // /com-chilipeppr-elem-dragdrop/ondropped
-            //chilipeppr.subscribe("/com-chilipeppr-elem-dragdrop/ondroppedSTL", this, this.onDroppedSTL, 9); // default is 10, we do 9 to be higher priority
-        
+            chilipeppr.subscribe('/com-chilipeppr-widget-3dviewer/com-chilipeppr-elem-dragdrop/ondropped', this, this.onDropped, 9); // default is 10, we do 9 to be higher priority
+            
             console.log("I am done being initted.");
         },
-        onDroppedSTL: function(data) {
+        /**
+         * Called after an STL file is droped.
+         */
+        onDropped: function(data) {
             console.log("STL Dropped:  ", data);
 
             //var reader = new FileReader();
@@ -189,16 +193,16 @@ cpdefine("inline:ch-onlfait-chilipeppr-meshes-widget", ["chilipeppr_ready", /* o
             // reader.readAsArrayBuffer (data);
             //reader.readAsText (data);
 
-            var arrayBuffer;
-            var fileReader = new FileReader();
-            fileReader.onload = function() {
-                arrayBuffer = this.result;
-                console.log('Raw filereader result:  ', this.result);
-            };
-            fileReader.readAsArrayBuffer(data);
+            // var arrayBuffer;
+            // var fileReader = new FileReader();
+            // fileReader.onload = function() {
+            //     arrayBuffer = this.result;
+            //     console.log('Raw filereader result:  ', this.result);
+            // };
+            // fileReader.readAsArrayBuffer(data);
 
 
-            console.log("result:  ", fileReader.result);
+            // console.log("result:  ", fileReader.result);
             //this.parseStlBinary(reader.result);
         },
         /**

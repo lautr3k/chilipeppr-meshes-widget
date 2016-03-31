@@ -81,7 +81,7 @@ To better understand how ChiliPeppr's publish() method works see amplify.js's do
           </tr>
       </thead>
       <tbody>
-      <tr><td colspan="2">(No signals defined in this widget/element)</td></tr>    
+      <tr valign="top"><td>/ch-onlfait-chilipeppr-meshes-widget/com-chilipeppr-widget-3dviewer/com-chilipeppr-elem-dragdrop/ondropped</td><td>...</td></tr>    
       </tbody>
   </table>
 
@@ -98,7 +98,7 @@ To better understand how ChiliPeppr's subscribe() method works see amplify.js's 
           </tr>
       </thead>
       <tbody>
-      <tr valign="top"><td>/ch-onlfait-chilipeppr-meshes-widget/com-chilipeppr-elem-dragdrop/ondroppedSTL</td><td>We subscribe to this signal at a higher priority to intercept the signal, double check if it is an Eagle Brd file and if so, we do not let it propagate by returning false. That way the 3D Viewer, Gcode widget, or other widgets will not get Eagle Brd file drag/drop events because they will not know how to interpret them.</td></tr>    
+      <tr><td colspan="2">(No signals defined in this widget/element)</td></tr>    
       </tbody>
   </table>
 
@@ -115,7 +115,7 @@ To better understand how ChiliPeppr's publish() method works see amplify.js's do
           </tr>
       </thead>
       <tbody>
-      <tr><td colspan="2">(No signals defined in this widget/element)</td></tr>    
+      <tr valign="top"><td>/ch-onlfait-chilipeppr-meshes-widget/com-chilipeppr-widget-3dviewer/com-chilipeppr-elem-dragdrop/ondropped</td><td>Example: We subscribe to this signal at a higher priority to intercept the signal. We do not let it propagate by returning false.</td></tr>    
       </tbody>
   </table>
 
@@ -137,7 +137,7 @@ other widgets know how to subscribe to them and what they do.</td></tr><tr valig
 other widgets know how to subscribe to them and what they do.</td></tr><tr valign="top"><td>foreignPublish</td><td>object</td><td>Please see docs above.<br><br>Document the foreign publish signals, i.e. signals owned by other widgets
 or elements, that this widget/element publishes to.</td></tr><tr valign="top"><td>foreignSubscribe</td><td>object</td><td>Please see docs above.<br><br>Document the foreign subscribe signals, i.e. signals owned by other widgets
 or elements, that this widget/element subscribes to.</td></tr><tr valign="top"><td>init</td><td>function</td><td>function () <br><br>All widgets should have an init method. It should be run by the
-instantiating code like a workspace or a different widget.</td></tr><tr valign="top"><td>onDroppedSTL</td><td>function</td><td>function (data) </td></tr><tr valign="top"><td>btnSetup</td><td>function</td><td>function () <br><br>Call this method from init to setup all the buttons when this widget
+instantiating code like a workspace or a different widget.</td></tr><tr valign="top"><td>onDropped</td><td>function</td><td>function (data) <br><br>Called after an STL file is droped.</td></tr><tr valign="top"><td>btnSetup</td><td>function</td><td>function () <br><br>Call this method from init to setup all the buttons when this widget
 is first loaded. This basically attaches click events to your 
 buttons. It also turns on all the bootstrap popovers by scanning
 the entire DOM of the widget.</td></tr><tr valign="top"><td>options</td><td>object</td><td>User options are available in this property for reference by your
