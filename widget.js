@@ -164,11 +164,11 @@ cpdefine("inline:ch-onlfait-chilipeppr-meshes-widget", ["chilipeppr_ready", /* o
             var that = this;
 
             // On drop file(s)
-            $('body').on('dragover', function (event) {
+            $('body').bind('dragover', function (event) {
                 event.stopPropagation();
                 event.preventDefault();
             })
-            .on('drop', function (event) {
+            .bind('drop', function (event) {
                 event = event || window.event;
                 event = event.originalEvent || event;
                     
