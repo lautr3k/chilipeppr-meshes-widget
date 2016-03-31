@@ -210,27 +210,40 @@ cpdefine("inline:ch-onlfait-chilipeppr-meshes-widget", ["chilipeppr_ready", /* o
             });
         },
         /**
-         * Called after an STL file is droped.
+         * On file(s) dropped.
          */
         onDrop: function(files) {
             console.log('Files dropped:', files);
-
-            //var reader = new FileReader();
-
-            // reader.readAsArrayBuffer (data);
-            //reader.readAsText (data);
-
-            // var arrayBuffer;
-            // var fileReader = new FileReader();
-            // fileReader.onload = function() {
-            //     arrayBuffer = this.result;
-            //     console.log('Raw filereader result:  ', this.result);
-            // };
-            // fileReader.readAsArrayBuffer(data);
-
-
-            // console.log("result:  ", fileReader.result);
-            //this.parseStlBinary(reader.result);
+            
+            for (var i = 0, il = files.length; i < il; i++) {
+                this.loadFile(files[i]);    
+            }
+        },
+        /**
+         * Loaded files collection.
+         */
+         loadedFiles: {},
+        /**
+         * Try to load a file (for now only STL).
+         */
+        loadFile: function(file) {
+            console.log('Load file:', file.name, file);
+            
+            // get file extension
+            var ext = file.name.split('.').pop().toLowerCase();
+            
+            if (ext != 'stl') {
+                console.warn('Loading "', file.name, '" aborted! - Not an STL file.');
+                return false;
+            }
+            
+            // unique id (in case two or more files as the same name but not the same contents)
+            file.uid = file.name+':'+file.size+':'+file.lastModified;
+            
+            // Push file in collection
+            this.loadedFiles[file.uid] = file;
+            
+            return file;
         },
         /**
          * This method loads the pubsubviewer widget which attaches to our 
