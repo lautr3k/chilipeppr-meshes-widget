@@ -58,6 +58,7 @@ requirejs.config({
         // Example of how to define the key (you make up the key) and the URL
         // Make sure you DO NOT put the .js at the end of the URL
         // SmoothieCharts: '//smoothiecharts.org/smoothie',
+        STLLoader: '//i2dcui.appspot.com/geturl?url=http://raw.githubusercontent.com/raykholo/widget-stlViewer/master/stl.js'
     },
     shim: {
         // See require.js docs for how to define dependencies that
@@ -98,8 +99,6 @@ cprequire_test(["inline:ch-onlfait-chilipeppr-meshes-widget"], function(myWidget
     );
     
     // flash message
-    $('body').append('<div id="com-chilipeppr-flash"></div>');
-    
     chilipeppr.load(
         "#com-chilipeppr-flash",
         "http://fiddle.jshell.net/chilipeppr/90698kax/show/light/",
@@ -136,7 +135,9 @@ cprequire_test(["inline:ch-onlfait-chilipeppr-meshes-widget"], function(myWidget
 } /*end_test*/ );
 
 // This is the main definition of your widget. Give it a unique name.
-cpdefine("inline:ch-onlfait-chilipeppr-meshes-widget", ["chilipeppr_ready", /* other dependencies here */ ], function() {
+cpdefine("inline:ch-onlfait-chilipeppr-meshes-widget",
+["chilipeppr_ready", "STLLoader"],
+function() {
     return {
         /**
          * The ID of the widget. You must define this and make it unique.
@@ -200,7 +201,6 @@ cpdefine("inline:ch-onlfait-chilipeppr-meshes-widget", ["chilipeppr_ready", /* o
                 event.preventDefault();
             })
             .bind('drop', function (event) {
-                console.warn('------------------------------>', event);
                 event = event || window.event;
                 event = event.originalEvent || event;
                     
@@ -241,8 +241,11 @@ cpdefine("inline:ch-onlfait-chilipeppr-meshes-widget", ["chilipeppr_ready", /* o
             // unique id (in case two or more files as the same name but not the same contents)
             file.uid = file.name+':'+file.size+':'+file.lastModified;
             
-            // Push file in collection
+            // push file in collection
             this.loadedFiles[file.uid] = file;
+            
+            // load file as STL
+            
             
             return file;
         },
