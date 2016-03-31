@@ -127,15 +127,14 @@ cprequire_test(["inline:ch-onlfait-chilipeppr-meshes-widget"], function(myWidget
     });
 
     // init my widget
-    myWidget.init();
+    //myWidget.init();
     
     $('#' + myWidget.id).css({
         'top': '90px',
         'left': '1px',
         'width': '492px',
         'position': 'absolute',
-        'background': 'transparent',
-        'z-index': '9999'
+        'background': 'transparent'
     });
     
     $('title').html(myWidget.name);
@@ -214,7 +213,7 @@ cpdefine("inline:ch-onlfait-chilipeppr-meshes-widget", ["chilipeppr_ready", /* o
          * buttons. It also turns on all the bootstrap popovers by scanning
          * the entire DOM of the widget.
          */
-        btnSetup: function() {
+        btnSetup: function() { console.log('dddddddddddddddd');
 
             // Chevron hide/show body
             var that = this;
