@@ -146,7 +146,7 @@ saveOptionsLocalStorage()</td></tr><tr valign="top"><td>setupUiFromLocalStorage<
 stored settings from localStorage and then adjust the UI to reflect
 what the user wants.</td></tr><tr valign="top"><td>saveOptionsLocalStorage</td><td>function</td><td>function () <br><br>When a user changes a value that is stored as an option setting, you
 should call this method immediately so that on next load the value
-is correctly set.</td></tr><tr valign="top"><td>showBody</td><td>function</td><td>function (evt) <br><br>Show the body of the panel.
+is correctly set.</td></tr><tr valign="top"><td>showBody</td><td>function</td><td>function (evt)  <br><br>Show the body of the panel.
 <br><br><b>evt</b> ({jquery_event})  - If you pass the event parameter in, we 
 know it was clicked by the user and thus we store it for the next 
 load so we can reset the user's preference. If you don't pass this 

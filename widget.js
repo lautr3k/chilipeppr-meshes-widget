@@ -91,14 +91,6 @@ cprequire_test(["inline:ch-onlfait-chilipeppr-meshes-widget"], function(myWidget
             threed.init({
                 doMyOwnDragDrop: false
             });
-            //$('#com-chilipeppr-widget-3dviewer .panel-heading').addClass('hidden');
-            //autolevel.addRegionTo3d();
-            //autolevel.loadFileFromLocalStorageKey('com-chilipeppr-widget-autolevel-recent8');
-            //autolevel.toggleShowMatrix();
-
-            // only init eagle widget once 3d is loaded
-            // set doMyOwnDragDrop
-            //ew.init(true);
             myWidget.init();
         });
     });
@@ -107,10 +99,12 @@ cprequire_test(["inline:ch-onlfait-chilipeppr-meshes-widget"], function(myWidget
     myWidget.init();
     
     $('#' + myWidget.id).css({
-        'margin': '20px',
-        'position': 'relative',
+        'top': '90px',
+        'left': '1px',
+        'width': '492px',
+        'position': 'absolute',
         'background': 'transparent',
-        'width': '300px'
+        'z-index': '9999'
     });
     
     $('title').html(myWidget.name);
@@ -194,7 +188,7 @@ cpdefine("inline:ch-onlfait-chilipeppr-meshes-widget", ["chilipeppr_ready", /* o
             // Chevron hide/show body
             var that = this;
             $('#' + this.id + ' .hidebody').click(function(evt) {
-                console.log("hide/unhide body");
+                console.log("hide/unhide body", evt);
                 if ($('#' + that.id + ' .panel-body').hasClass('hidden')) {
                     // it's hidden, unhide
                     that.showBody(evt);
@@ -322,7 +316,7 @@ cpdefine("inline:ch-onlfait-chilipeppr-meshes-widget", ["chilipeppr_ready", /* o
          * value in we don't store the preference because it was likely code 
          * that sent in the param.
          */
-        showBody: function(evt) {
+        showBody: function(evt) { 
             $('#' + this.id + ' .panel-body').removeClass('hidden');
             $('#' + this.id + ' .panel-footer').removeClass('hidden');
             $('#' + this.id + ' .hidebody span').addClass('glyphicon-chevron-up');
