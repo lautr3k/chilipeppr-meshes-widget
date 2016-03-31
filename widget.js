@@ -85,7 +85,9 @@ cprequire_test(["inline:ch-onlfait-chilipeppr-meshes-widget"], function(myWidget
 
     chilipeppr.load("#3dviewer", "https://raw.githubusercontent.com/chilipeppr/widget-3dviewer/master/auto-generated-widget.html", function() {
         cprequire(['inline:com-chilipeppr-widget-3dviewer'], function(threed) {
-            threed.init();
+            threed.init({
+                doMyOwnDragDrop: false
+            });
             myWidget.init();
         });
     });
@@ -157,56 +159,31 @@ cpdefine("inline:ch-onlfait-chilipeppr-meshes-widget", ["chilipeppr_ready", /* o
         /**
          * Setup drag/drop on body.
          */
-        dropSetup: function(targetSelector) {
+        dropSetup: function() {
             // self alias
             var that = this;
 
-            // Create drag and drop
-            this.dropArea = $(targetSelector || 'body');
+            // On drop file(s)
+            $('body').on('drop', function(event) {
+
+                event = event || window.event;
+                event = event.originalEvent || event;
             
-            console.error('------------------------------------>>>',this.dropArea);
+                event.stopPropagation();
+                event.preventDefault();
 
-            // Attach our drag and drop handlers.
-            this.dropArea.bind({
-                drop: function(e) {
-            
-                    console.error('------------------------------------>>>', e);
-                    
-                    // drop event
-                    e = e || window.event;
-                    
-                    // prevent default
-                    e.preventDefault();
+                var files = (event.files || event.dataTransfer.files);
 
-                    // jQuery wraps the originalEvent, so we try to detect that here...
-                    e = e.originalEvent || e;
+                that.onDrop(files);
 
-                    // Using e.files with fallback because e.dataTransfer is immutable and can't be overridden in Polyfills (http://sandbox.knarly.com/js/dropfiles/).            
-                    var files = (e.files || e.dataTransfer.files);
-
-                    console.log("Files dropped: ", files);
-
-                    // for (var i = 0; i < files.length; i++) {
-                    //     console.log('Loading STL no ', i);
-                    //     $('#stlFileNames > tbody:last-child').append('<tr id="tr' + [i] + '"><td>' + [i] + '</td><td>' + files[i].name + '</td></tr>');
-                    //     (function(i) {
-                    //         // parse binary STL
-                    //         console.log('But do we have a loader?', that.stlloader);
-                    //         console.log("what does loadFile look like?", that.stlloader.loadFile);
-                    //         that.stlloader.loadFile(files[i], i, that);
-                    //         console.log('After Loadfile no ', i);
-                    //     })(i);
-                    // }
-
-                    return false;
-                }
+                return false;
             });
         },
         /**
          * Called after an STL file is droped.
          */
-        onDrop: function(data) {
-            console.log("STL Dropped:  ", data);
+        onDrop: function(files) {
+            console.log('Files dropped:', files);
 
             //var reader = new FileReader();
 
