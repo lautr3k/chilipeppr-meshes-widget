@@ -80,12 +80,12 @@ cpdefine("inline:ch-onlfait-chilipeppr-meshes-widget", ["chilipeppr_ready", /* o
          * The ID of the widget. You must define this and make it unique.
          */
         id: "ch-onlfait-chilipeppr-meshes-widget", // Make the id the same as the cpdefine id
-        name: "Widget / Template", // The descriptive name of your widget.
-        desc: "This example widget gives you a framework for creating your own widget. Please change this description once you fork this template and create your own widget. Make sure to run runme.js every time you are done editing your code so you can regenerate your README.md file, regenerate your auto-generated-widget.html, and automatically push your changes to Github.", // A description of what your widget does
-        url: "(auto fill by runme.js)",       // The final URL of the working widget as a single HTML file with CSS and Javascript inlined. You can let runme.js auto fill this if you are using Cloud9.
-        fiddleurl: "(auto fill by runme.js)", // The edit URL. This can be auto-filled by runme.js in Cloud9 if you'd like, or just define it on your own to help people know where they can edit/fork your widget
-        githuburl: "(auto fill by runme.js)", // The backing github repo
-        testurl: "(auto fill by runme.js)",   // The standalone working widget so can view it working by itself
+        name: "Meshes Widget.",                    // The descriptive name of your widget.
+        desc: "Meshes viewer/editor ...",          // A description of what your widget does
+        url: "(auto fill by runme.js)",            // The final URL of the working widget as a single HTML file with CSS and Javascript inlined. You can let runme.js auto fill this if you are using Cloud9.
+        fiddleurl: "(auto fill by runme.js)",      // The edit URL. This can be auto-filled by runme.js in Cloud9 if you'd like, or just define it on your own to help people know where they can edit/fork your widget
+        githuburl: "(auto fill by runme.js)",      // The backing github repo
+        testurl: "(auto fill by runme.js)",        // The standalone working widget so can view it working by itself
         /**
          * Define pubsub signals below. These are basically ChiliPeppr's event system.
          * ChiliPeppr uses amplify.js's pubsub system so please refer to docs at
@@ -97,7 +97,7 @@ cpdefine("inline:ch-onlfait-chilipeppr-meshes-widget", ["chilipeppr_ready", /* o
          */
         publish: {
             // Define a key:value pair here as strings to document what signals you publish.
-            '/onExampleGenerate': 'Example: Publish this signal when we go to generate gcode.'
+            //'/onExampleGenerate': 'Example: Publish this signal when we go to generate gcode.'
         },
         /**
          * Define the subscribe signals that this widget/element owns or defines so that
@@ -176,37 +176,37 @@ cpdefine("inline:ch-onlfait-chilipeppr-meshes-widget", ["chilipeppr_ready", /* o
             // as opposed to a full callback method in the Hello Word 2
             // example further below. Notice we have to use "that" so 
             // that the this is set correctly inside the anonymous method
-            $('#' + this.id + ' .btn-sayhello').click(function() {
-                console.log("saying hello");
-                // Make sure popover is immediately hidden
-                $('#' + that.id + ' .btn-sayhello').popover("hide");
-                // Show a flash msg
-                chilipeppr.publish(
-                    "/com-chilipeppr-elem-flashmsg/flashmsg",
-                    "Hello Title",
-                    "Hello World from widget " + that.id,
-                    1000
-                );
-            });
+            // $('#' + this.id + ' .btn-sayhello').click(function() {
+            //     console.log("saying hello");
+            //     // Make sure popover is immediately hidden
+            //     $('#' + that.id + ' .btn-sayhello').popover("hide");
+            //     // Show a flash msg
+            //     chilipeppr.publish(
+            //         "/com-chilipeppr-elem-flashmsg/flashmsg",
+            //         "Hello Title",
+            //         "Hello World from widget " + that.id,
+            //         1000
+            //     );
+            // });
 
             // Init Hello World 2 button on Tab 1. Notice the use
             // of the slick .bind(this) technique to correctly set "this"
             // when the callback is called
-            $('#' + this.id + ' .btn-helloworld2').click(this.onHelloBtnClick.bind(this));
+            //$('#' + this.id + ' .btn-helloworld2').click(this.onHelloBtnClick.bind(this));
 
         },
         /**
          * onHelloBtnClick is an example of a button click event callback
          */
-        onHelloBtnClick: function(evt) {
-            console.log("saying hello 2 from btn in tab 1");
-            chilipeppr.publish(
-                '/com-chilipeppr-elem-flashmsg/flashmsg',
-                "Hello 2 Title",
-                "Hello World 2 from Tab 1 from widget " + this.id,
-                2000 /* show for 2 second */
-            );
-        },
+        // onHelloBtnClick: function(evt) {
+        //     console.log("saying hello 2 from btn in tab 1");
+        //     chilipeppr.publish(
+        //         '/com-chilipeppr-elem-flashmsg/flashmsg',
+        //         "Hello 2 Title",
+        //         "Hello World 2 from Tab 1 from widget " + this.id,
+        //         2000 /* show for 2 second */
+        //     );
+        // },
         /**
          * User options are available in this property for reference by your
          * methods. If any change is made on these options, please call
@@ -237,9 +237,9 @@ cpdefine("inline:ch-onlfait-chilipeppr-meshes-widget", ["chilipeppr_ready", /* o
             else {
                 options = {
                     showBody: true,
-                    tabShowing: 1,
-                    customParam1: null,
-                    customParam2: 1.0
+                    //tabShowing: 2,
+                    //customParam1: null,
+                    //customParam2: 1.0
                 };
             }
 
