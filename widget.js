@@ -169,6 +169,7 @@ cpdefine("inline:ch-onlfait-chilipeppr-meshes-widget", ["chilipeppr_ready", /* o
                 event.preventDefault();
             })
             .bind('drop', function (event) {
+                console.warn('------------------------------>', event);
                 event = event || window.event;
                 event = event.originalEvent || event;
                     
