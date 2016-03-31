@@ -184,6 +184,7 @@ cpdefine("inline:ch-onlfait-chilipeppr-meshes-widget", ["chilipeppr_ready", /* o
             // Define a key:value pair here as strings to document what signals you publish to
             // that are owned by foreign/other widgets.
             // '/jsonSend': 'Example: We send Gcode to the serial port widget to do stuff with the CNC controller.'
+            '/com-chilipeppr-elem-dragdrop/ondroppedSTL': 'We subscribe to this signal at a higher priority to intercept the signal, double check if it is an Eagle Brd file and if so, we do not let it propagate by returning false. That way the 3D Viewer, Gcode widget, or other widgets will not get Eagle Brd file drag/drop events because they will not know how to interpret them.'
         },
         /**
          * Document the foreign subscribe signals, i.e. signals owned by other widgets
@@ -204,6 +205,11 @@ cpdefine("inline:ch-onlfait-chilipeppr-meshes-widget", ["chilipeppr_ready", /* o
             this.setupUiFromLocalStorage();
             this.btnSetup();
             this.forkSetup();
+
+
+            // /com-chilipeppr-elem-dragdrop/ondropped
+            chilipeppr.subscribe("/com-chilipeppr-elem-dragdrop/ondroppedSTL", this, this.onDroppedSTL, 9); // default is 10, we do 9 to be higher priority
+        
 
             console.log("I am done being initted.");
         },

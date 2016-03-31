@@ -98,7 +98,7 @@ To better understand how ChiliPeppr's subscribe() method works see amplify.js's 
           </tr>
       </thead>
       <tbody>
-      <tr><td colspan="2">(No signals defined in this widget/element)</td></tr>    
+      <tr valign="top"><td>/ch-onlfait-chilipeppr-meshes-widget/com-chilipeppr-elem-dragdrop/ondroppedSTL</td><td>We subscribe to this signal at a higher priority to intercept the signal, double check if it is an Eagle Brd file and if so, we do not let it propagate by returning false. That way the 3D Viewer, Gcode widget, or other widgets will not get Eagle Brd file drag/drop events because they will not know how to interpret them.</td></tr>    
       </tbody>
   </table>
 
