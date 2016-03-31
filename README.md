@@ -3,7 +3,7 @@ Meshes viewer/editor ...
 
 ![alt text](screenshot.png "Screenshot")
 
-## ChiliPeppr Meshes Widget.
+## ChiliPeppr Meshes widget.
 
 All ChiliPeppr widgets/elements are defined using cpdefine() which is a method
 that mimics require.js. Each defined object must have a unique ID so it does
@@ -12,7 +12,7 @@ not conflict with other ChiliPeppr widgets.
 | Item                  | Value           |
 | -------------         | ------------- | 
 | ID                    | ch-onlfait-chilipeppr-meshes-widget |
-| Name                  | Meshes Widget. |
+| Name                  | Meshes widget. |
 | Description           | Meshes viewer/editor ... |
 | chilipeppr.load() URL | http://raw.githubusercontent.com/lautr3k/chilipeppr-meshes-widget/master/auto-generated-widget.html |
 | Edit URL              | http://ide.c9.io/lautr3k/chilipeppr-meshes-widget |
@@ -41,7 +41,7 @@ chilipeppr.load(
       ["inline:ch-onlfait-chilipeppr-meshes-widget"], // the id you gave your widget
       function(myObjChOnlfaitChilipepprMeshesWidget) {
         // Callback that is passed reference to the newly loaded widget
-        console.log("Meshes Widget. just got loaded.", myObjChOnlfaitChilipepprMeshesWidget);
+        console.log("Meshes widget. just got loaded.", myObjChOnlfaitChilipepprMeshesWidget);
         myObjChOnlfaitChilipepprMeshesWidget.init();
       }
     );
@@ -132,7 +132,7 @@ The table below shows, in order, the methods and properties inside the widget/el
           </tr>
       </thead>
       <tbody>
-      <tr valign="top"><td>id</td><td>string</td><td>"ch-onlfait-chilipeppr-meshes-widget"<br><br>The ID of the widget. You must define this and make it unique.</td></tr><tr valign="top"><td>name</td><td>string</td><td>"Meshes Widget."</td></tr><tr valign="top"><td>desc</td><td>string</td><td>"Meshes viewer/editor ..."</td></tr><tr valign="top"><td>url</td><td>string</td><td>"http://raw.githubusercontent.com/lautr3k/chilipeppr-meshes-widget/master/auto-generated-widget.html"</td></tr><tr valign="top"><td>fiddleurl</td><td>string</td><td>"http://ide.c9.io/lautr3k/chilipeppr-meshes-widget"</td></tr><tr valign="top"><td>githuburl</td><td>string</td><td>"http://github.com/lautr3k/chilipeppr-meshes-widget"</td></tr><tr valign="top"><td>testurl</td><td>string</td><td>"http://chilipeppr-meshes-widget-lautr3k.c9users.io/widget.html"</td></tr><tr valign="top"><td>publish</td><td>object</td><td>Please see docs above.<br><br>Define the publish signals that this widget/element owns or defines so that
+      <tr valign="top"><td>id</td><td>string</td><td>"ch-onlfait-chilipeppr-meshes-widget"<br><br>The ID of the widget. You must define this and make it unique.</td></tr><tr valign="top"><td>name</td><td>string</td><td>"Meshes widget."</td></tr><tr valign="top"><td>desc</td><td>string</td><td>"Meshes viewer/editor ..."</td></tr><tr valign="top"><td>url</td><td>string</td><td>"http://raw.githubusercontent.com/lautr3k/chilipeppr-meshes-widget/master/auto-generated-widget.html"</td></tr><tr valign="top"><td>fiddleurl</td><td>string</td><td>"http://ide.c9.io/lautr3k/chilipeppr-meshes-widget"</td></tr><tr valign="top"><td>githuburl</td><td>string</td><td>"http://github.com/lautr3k/chilipeppr-meshes-widget"</td></tr><tr valign="top"><td>testurl</td><td>string</td><td>"http://chilipeppr-meshes-widget-lautr3k.c9users.io/widget.html"</td></tr><tr valign="top"><td>publish</td><td>object</td><td>Please see docs above.<br><br>Define the publish signals that this widget/element owns or defines so that
 other widgets know how to subscribe to them and what they do.</td></tr><tr valign="top"><td>subscribe</td><td>object</td><td>Please see docs above.<br><br>Define the subscribe signals that this widget/element owns or defines so that
 other widgets know how to subscribe to them and what they do.</td></tr><tr valign="top"><td>foreignPublish</td><td>object</td><td>Please see docs above.<br><br>Document the foreign publish signals, i.e. signals owned by other widgets
 or elements, that this widget/element publishes to.</td></tr><tr valign="top"><td>foreignSubscribe</td><td>object</td><td>Please see docs above.<br><br>Document the foreign subscribe signals, i.e. signals owned by other widgets
