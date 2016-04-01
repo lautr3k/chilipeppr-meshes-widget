@@ -27,7 +27,7 @@ requirejs.config({
         // Example of how to define the key (you make up the key) and the URL
         // Make sure you DO NOT put the .js at the end of the URL
         // SmoothieCharts: '//smoothiecharts.org/smoothie',
-        STLLoader: '//i2dcui.appspot.com/geturl?url=http://raw.githubusercontent.com/raykholo/widget-stlViewer/master/stl.js'
+        STLLoader: '//i2dcui.appspot.com/geturl?url=https://raw.githubusercontent.com/lautr3k/chilipeppr-meshes-widget/master/lib/STLLoader.js'
     },
     shim: {
         // See require.js docs for how to define dependencies that
@@ -192,7 +192,7 @@ function() {
         /**
          * Loaded files collection.
          */
-         loadedFiles: {},
+        loadedFiles: {},
         /**
          * Try to load a file (for now only STL).
          */
@@ -214,7 +214,20 @@ function() {
             this.loadedFiles[file.uid] = file;
             
             // load file as STL
+            var loader = new STLLoader();
             
+            // on geometry
+            loader.onGeometry = function(geometry) {
+               console.log('Loaded geometry:', geometry);
+            };
+            
+            // on error
+            loader.onError = function(error) {
+               console.error('Error on loading ": ', file.name, '":', error);
+            };
+            
+            // try to load the file
+            loader.loadFile(file);
             
             return file;
         },
