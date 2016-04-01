@@ -92,10 +92,10 @@ cprequire_test(["inline:ch-onlfait-chilipeppr-meshes-widget"], function(myWidget
     });
     
     $('#' + myWidget.id).css({
-        'top': '90px',
-        'left': '1px',
-        'width': '492px',
-        'position': 'absolute',
+        //'top': '90px',
+        //'left': '1px',
+        'width': '300px',
+        'position': 'relative',
         'background': 'transparent'
     });
     
